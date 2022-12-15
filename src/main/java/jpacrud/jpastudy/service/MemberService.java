@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService {
 
     private final MemberRepository memberRepository;
@@ -21,11 +23,14 @@ public class MemberService {
         return member.getId();
     }
 
-
     public List<Member> findMembers() {
         return memberRepository.findAll();
     }
 
+    public Member findById(Long id) {
+        return memberRepository.findById(id).get();
+    }
+    @Transactional
     public void update(Long id, String name) {
         Member member = memberRepository.findById(id).get();
         member.changeMember(name);
