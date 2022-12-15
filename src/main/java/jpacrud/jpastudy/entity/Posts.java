@@ -16,6 +16,7 @@ public class Posts {
 
     private String title;
 
+
     private String content;
 
     private String author;
